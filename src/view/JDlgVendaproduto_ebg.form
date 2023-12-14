@@ -30,32 +30,32 @@
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTxtQuantidade" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                              <Component id="jTxtQuantidade_ebg" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTxtValor_unit" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                              <Component id="jTxtValorunit_ebg" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTxtTotal" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                              <Component id="jTxtTotal_ebg" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCboProduto" alignment="0" min="-2" pref="276" max="-2" attributes="0"/>
+                              <Component id="jCboProduto_ebg" alignment="0" min="-2" pref="276" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="jBtnConfirmar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBtnConfirmar_ebg" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jBtnCancelar" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBtnCancelar_ebg" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="27" max="32767" attributes="0"/>
@@ -68,7 +68,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jCboProduto" min="-2" max="-2" attributes="0"/>
+              <Component id="jCboProduto_ebg" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel3" alignment="1" min="-2" pref="14" max="-2" attributes="0"/>
@@ -79,14 +79,14 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTxtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTxtValor_unit" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTxtTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTxtQuantidade_ebg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTxtValorunit_ebg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTxtTotal_ebg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jBtnConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBtnConfirmar_ebg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBtnCancelar_ebg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
@@ -94,7 +94,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jBtnCancelar">
+    <Component class="javax.swing.JButton" name="jBtnCancelar_ebg">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagens/03 - exit.png"/>
@@ -102,7 +102,7 @@
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCancelarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCancelar_ebgActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -110,7 +110,7 @@
         <Property name="text" type="java.lang.String" value="Produto"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jCboProduto">
+    <Component class="javax.swing.JComboBox" name="jCboProduto_ebg">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
@@ -118,7 +118,7 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;Produto&gt;()"/>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Produto&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ProdutoEbg&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -136,19 +136,19 @@
         <Property name="text" type="java.lang.String" value="Total"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtQuantidade">
+    <Component class="javax.swing.JTextField" name="jTxtQuantidade_ebg">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtQuantidadeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtQuantidade_ebgActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtValor_unit">
+    <Component class="javax.swing.JTextField" name="jTxtValorunit_ebg">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtValor_unitActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtValorunit_ebgActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtTotal">
+    <Component class="javax.swing.JTextField" name="jTxtTotal_ebg">
     </Component>
-    <Component class="javax.swing.JButton" name="jBtnConfirmar">
+    <Component class="javax.swing.JButton" name="jBtnConfirmar_ebg">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagens/05 - ok.png"/>
@@ -156,7 +156,7 @@
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnConfirmarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnConfirmar_ebgActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

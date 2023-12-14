@@ -25,6 +25,21 @@ public class VendaprodutoController_ebg extends AbstractTableModel {
         return (VendaprodutoEbg) lista.get(linha);
     }
     
+    public void addBean(VendaprodutoEbg vendaprodutoEbg) {
+            lista.add(vendaprodutoEbg);
+            this.fireTableDataChanged();
+    }
+    
+    public void removeBean(int index) {
+            lista.remove(index);
+            this.fireTableDataChanged();
+    }
+    
+    public void updateBean(int index, VendaprodutoEbg vendaprodutoEbg){
+        lista.set(index, vendaprodutoEbg);
+        this.fireTableDataChanged();
+    }
+    
     @Override
     public int getRowCount() {
         return lista.size();

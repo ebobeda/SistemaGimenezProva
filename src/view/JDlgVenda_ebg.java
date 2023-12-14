@@ -8,13 +8,19 @@ package view;
 import bean.ClienteEbg;
 import bean.VendaEbg;
 import bean.VendaprodutoEbg;
+import bean.VendedorEbg;
+import dao.Cliente_DAO;
 import dao.Venda_DAO;
 import dao.Vendaproduto_DAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import tools.Util_ebg;
 
 /**
  *
@@ -25,7 +31,7 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
     private boolean incluindo;
     
     VendaEbg vendaEbg;
-    Venda_DAO Venda_DAO;
+    Venda_DAO venda_DAO;
     VendaController_ebg vendaController_ebg;
     VendaprodutoEbg vendaprodutoEbg;
     Vendaproduto_DAO vendaproduto_DAO;
@@ -36,40 +42,66 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
     /**
      * Creates new form JDlgVendas
      */
+    
     public JDlgVenda_ebg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Vendas");
+        setLocationRelativeTo(null);
+        Util_ebg.habilitar(false, jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg, jBtnIncluirProd_ebg, jBtnAlterarProd_ebg, jBtnIncluirProd_ebg, jBtnCancelar_ebg, jBtnConfirmar_ebg);
+        venda_DAO = new Venda_DAO();
+        
+        Cliente_DAO cliente_DAO = new Cliente_DAO();
+        List listaCli = cliente_DAO.listAll();
+        for (int i = 0; i < listaCli.size(); i++) {
+        jCboCliente_ebg.addItem((ClienteEbg) listaCli.get(i));
+        
+    }
+        vendaprodutoController_ebg = new VendaprodutoController_ebg();
+        List lista = new ArrayList();
+        vendaprodutoController_ebg.setList(lista);
+        jTable1.setModel(vendaprodutoController_ebg);
+   
+    try {
+            mascaraData = new MaskFormatter("##/##/####");
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVenda_ebg.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         jFmtData_ebg.setFormatterFactory(new DefaultFormatterFactory(mascaraData));
     }
 
-    public Venda viewBean() {
-        Venda venda = new Venda();
+    public VendaEbg viewBean() {
+        VendaEbg vendaEbg = new VendaEbg();
         
-        int id = Integer.valueOf(jTxtVenda.getText());
-        venda.setId_venda(id);
-        
+        vendaEbg.setIdvendaEbg(Util_ebg.strInt(jTxtVenda_ebg.getText()));
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            venda.setData(formato.parse(jFmtData.getText()));
+            vendaEbg.setDataEbg(formato.parse(jFmtData_ebg.getText()));
         } catch (ParseException ex) {
-            Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JDlgUsuario_ebg.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        venda.setVendedor(jCboVendedor.getSelectedIndex());
-        venda.setCliente(jCboCliente.getSelectedIndex());
-        venda.setTotal_venda(jTxtTotal.getText());
+        vendaEbg.setVendedorEbg((VendedorEbg)jCboVendedor_ebg.getSelectedItem());
+        vendaEbg.setClienteEbg((ClienteEbg)jCboCliente_ebg.getSelectedItem());
+        vendaEbg.setTotalvendaEbg(Util_ebg.strDouble(jTxtTotal_ebg.getText()));
         
-        return venda;
+        return vendaEbg;
     }
     
-    public void beanView(Venda venda){
-        String valor = String.valueOf(venda.getId_venda());
+    public void beanView(VendaEbg vendaEbg){
+        String id = String.valueOf(vendaEbg.getIdvendaEbg());
         
-        jTxtVenda.setText(valor);
+        jTxtVenda_ebg.setText(id);
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        jFmtData.setText(formato.format (venda.getData()));
-        jCboCliente.setSelectedIndex(venda.getVendedor());
-        jCboVendedor.setSelectedIndex(venda.getVendedor());
-        jTxtTotal.setText(venda.getTotal_venda());
+        jFmtData_ebg.setText(formato.format (vendaEbg.getDataEbg()));
+        jCboCliente_ebg.setSelectedItem(vendaEbg.getClienteEbg());
+        jCboVendedor_ebg.setSelectedItem(vendaEbg.getVendedorEbg());
+        jTxtTotal_ebg.setText(Util_ebg.doubleStr(vendaEbg.getTotalvendaEbg()));
+    }
+    
+    public int getSelectedRowProd() {
+        return jTable1.getSelectedRow();
+    
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,7 +190,7 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "produto", "quantidade", "valor unitario", "total"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -316,9 +348,13 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
 
     private void jBtnAlterarProd_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProd_ebgActionPerformed
         // TODO add your handling code here:
-        JDlgVendaproduto jDlgVendaproduto = new JDlgVendaproduto(null, true);
-        jDlgVendaproduto.setTitle("Alterar Produto");
-        jDlgVendaproduto.setVisible(true);
+        JDlgVendaproduto_ebg jDlgVendaproduto_ebg = new JDlgVendaproduto_ebg(null, true);
+        jDlgVendaproduto_ebg.setTitle("Alteração de Produtos");
+        jDlgVendaproduto_ebg.setTelaAnterior(this);
+        int linSel = jTable1.getSelectedRow();
+        VendaprodutoEbg vendaprodutoEbg = (VendaprodutoEbg) vendaprodutoController_ebg.getBean(linSel);
+        jDlgVendaproduto_ebg.beanView(vendaprodutoEbg);
+        jDlgVendaproduto_ebg.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarProd_ebgActionPerformed
 
     private void jCboVendedor_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboVendedor_ebgActionPerformed
@@ -327,11 +363,13 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
 
     private void jBtnExcluirProd_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProd_ebgActionPerformed
         // TODO add your handling code here:
-        int resp = JOptionPane.showConfirmDialog(null, "Deseja Excluir o resgistro?", "Confirmar", JOptionPane.YES_NO_OPTION);
-
-        if (resp == JOptionPane.YES_OPTION){
+        int linha = jTable1.getSelectedRow();
+        if (linha == -1){
+            Util_ebg.mensagem("Nenhuma linha selecionada");
         }else{
-            JOptionPane.showMessageDialog(null, "Exclusão cancelada", "Alerta", 2);
+            if(Util_ebg.perguntar("Confirmar exclusão do produto?") == true){
+                vendaprodutoController_ebg.removeBean(linha);
+            }
         }
     }//GEN-LAST:event_jBtnExcluirProd_ebgActionPerformed
 
@@ -393,9 +431,10 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
 
     private void jBtnIncluirProd_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProd_ebgActionPerformed
         // TODO add your handling code here:
-        JDlgVendaproduto jDlgVendaproduto = new JDlgVendaproduto(null, true);
-        jDlgVendaproduto.setTitle("Incluir Produto");
-        jDlgVendaproduto.setVisible(true);
+        JDlgVendaproduto_ebg jDlgVendaproduto_ebg = new JDlgVendaproduto_ebg(null, true);
+        jDlgVendaproduto_ebg.setTitle("Incluisão de Produtos");
+        jDlgVendaproduto_ebg.setTelaAnterior(this);
+        jDlgVendaproduto_ebg.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirProd_ebgActionPerformed
 
     private void jBtnIncluir_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluir_ebgActionPerformed
@@ -463,8 +502,8 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
     private javax.swing.JButton jBtnIncluirProd_ebg;
     private javax.swing.JButton jBtnIncluir_ebg;
     private javax.swing.JButton jBtnPesquisar_ebg;
-    private javax.swing.JComboBox<Cliente> jCboCliente_ebg;
-    private javax.swing.JComboBox<Caixa> jCboVendedor_ebg;
+    private javax.swing.JComboBox<ClienteEbg> jCboCliente_ebg;
+    private javax.swing.JComboBox<VendaEbg> jCboVendedor_ebg;
     private javax.swing.JFormattedTextField jFmtData_ebg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
