@@ -237,6 +237,7 @@ public class JDlgCartao_ebg extends javax.swing.JDialog {
         } else {
             cartao_DAO.update(cartaoEbg);
         }
+    setVisible(false);  
     
     Util_ebg.limparCampos(jTxtCodigo_ebg, jTxtNomecompleto_ebg, jFmtCpf_ebg, jTxtNumerocartao_ebg, jTxtCsc_ebg, jFmtValidade_ebg);
     Util_ebg.mensagem("Incluido com sucesso!");

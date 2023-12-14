@@ -335,7 +335,7 @@ public class JFrmPrincipal_ebg extends javax.swing.JFrame {
 
     private void jMnuVendas_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendas_ebgActionPerformed
         // TODO add your handling code here:
-        JDlgVendas_ebg jDlgVendas_ebg = new JDlgVendas_ebg(null, true);
+        JDlgVenda_ebg jDlgVendas_ebg = new JDlgVenda_ebg(null, true);
         jDlgVendas_ebg.setVisible(true);
     }//GEN-LAST:event_jMnuVendas_ebgActionPerformed
 

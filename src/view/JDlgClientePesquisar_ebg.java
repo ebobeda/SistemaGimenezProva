@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class JDlgClientePesquisar_ebg extends javax.swing.JDialog {
     private JDlgCliente_ebg jDlgCliente_ebg;
-    ClienteController_ebg clienteControle_ebg;
+    ClienteController_ebg clienteController_ebg;
     /**
      * Creates new form JDlgClientePesquisar
      */
@@ -21,12 +21,12 @@ public class JDlgClientePesquisar_ebg extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Consulta de usuários");
-        clienteControle_ebg = new ClienteController_ebg();
+        setTitle("Consulta de clientes");
+        clienteController_ebg = new ClienteController_ebg();
         Cliente_DAO cliente_DAO = new Cliente_DAO();
         List lista = cliente_DAO.listAll();
-        clienteControle_ebg.setList(lista);
-        jTable1.setModel(clienteControle_ebg);
+        clienteController_ebg.setList(lista);
+        jTable1.setModel(clienteController_ebg);
     }
 
     /**
@@ -109,7 +109,7 @@ public class JDlgClientePesquisar_ebg extends javax.swing.JDialog {
     private void jBtnOk_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk_ebgActionPerformed
         // TODO add your handling code here:
         int rowSel = jTable1.getSelectedRow();
-        ClienteEbg clienteEbg = clienteControle_ebg.getBean(rowSel);
+        ClienteEbg clienteEbg = clienteController_ebg.getBean(rowSel);
         jDlgCliente_ebg.beanView(clienteEbg);
         setVisible(false);
     }//GEN-LAST:event_jBtnOk_ebgActionPerformed

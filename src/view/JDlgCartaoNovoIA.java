@@ -21,7 +21,7 @@ public class JDlgCartaoNovoIA extends javax.swing.JDialog {
     
     CartaoEbg cartaoEbg;
     Cartao_DAO cartao_DAO;
-    CartaoController_ebg cartaoControle_ebg;
+    CartaoController_ebg cartaoController_ebg;
     JDlgCartao_ebg jDlgCartaoNovoIA;
     boolean incluindo;
     
@@ -31,11 +31,11 @@ public class JDlgCartaoNovoIA extends javax.swing.JDialog {
         setTitle("Inclusão");
         setLocationRelativeTo(null);
         jDlgCartaoNovoIA = new JDlgCartao_ebg(null, true);
-        cartaoControle_ebg = new CartaoController_ebg();
+        cartaoController_ebg = new CartaoController_ebg();
         cartao_DAO = new Cartao_DAO();
         List lista = cartao_DAO.listAll();
-        cartaoControle_ebg.setList(lista);
-        jTable1.setModel(cartaoControle_ebg);
+        cartaoController_ebg.setList(lista);
+        jTable1.setModel(cartaoController_ebg);
     }
 
     /**
@@ -117,9 +117,10 @@ public class JDlgCartaoNovoIA extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluir_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluir_ebgActionPerformed
-        incluindo = true;
         jDlgCartaoNovoIA.setTitle("Incluir");
         jDlgCartaoNovoIA.setVisible(true);
+        List lista = cartao_DAO.listAll();
+        cartaoController_ebg.setList(lista);
     }//GEN-LAST:event_jBtnIncluir_ebgActionPerformed
 
     private void jBtnAlterar_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterar_ebgActionPerformed
@@ -131,11 +132,11 @@ public class JDlgCartaoNovoIA extends javax.swing.JDialog {
     private void jBtnExcluir_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_ebgActionPerformed
         if(Util_ebg.perguntar("Deseja excuir este cartão?") == true) {
         int sel = jTable1.getSelectedRow();
-        CartaoEbg cartaoEbg = cartaoControle_ebg.getBean(sel);
+        CartaoEbg cartaoEbg = cartaoController_ebg.getBean(sel);
         cartao_DAO.delete(cartaoEbg);
         
         List lista = cartao_DAO.listAll();
-        cartaoControle_ebg.setList(lista);
+        cartaoController_ebg.setList(lista);
         Util_ebg.mensagem("Excluido com sucesso!");
         }else{
         Util_ebg.mensagem("Exclusão cancelada!");}
