@@ -313,18 +313,18 @@ public class JFrmPrincipal_ebg extends javax.swing.JFrame {
 
     private void jMenuCartao_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCartao_ebgActionPerformed
         // TODO add your handling code here:
-        JDlgCartaoNovoIA jDlgCartao_ebg = new JDlgCartaoNovoIA(null, true);
+        JDlgCartao_ebg jDlgCartao_ebg = new JDlgCartao_ebg(null, true);
         jDlgCartao_ebg.setVisible(true);
     }//GEN-LAST:event_jMenuCartao_ebgActionPerformed
 
     private void jMenuVendedor_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVendedor_ebgActionPerformed
         // TODO add your handling code here:
-        JDlgVendedorNovoIA jDlgVendedor_ebg = new JDlgVendedorNovoIA(null, true);
+        JDlgVendedor_ebg jDlgVendedor_ebg = new JDlgVendedor_ebg(null, true);
         jDlgVendedor_ebg.setVisible(true);
     }//GEN-LAST:event_jMenuVendedor_ebgActionPerformed
 
     private void jMenuProduto_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProduto_ebgActionPerformed
-        JDlgProdutoNovoIA jDlgProduto_ebg = new JDlgProdutoNovoIA(null, true);
+        JDlgProduto_ebg jDlgProduto_ebg = new JDlgProduto_ebg(null, true);
         jDlgProduto_ebg.setVisible(true);
     }//GEN-LAST:event_jMenuProduto_ebgActionPerformed
 
@@ -350,17 +350,17 @@ public class JFrmPrincipal_ebg extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnToolUsuario_ebgActionPerformed
 
     private void jBtnToolCartao_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnToolCartao_ebgActionPerformed
-        JDlgCartaoNovoIA jDlgCartao_ebg = new JDlgCartaoNovoIA(null, true);
+        JDlgCartao_ebg jDlgCartao_ebg = new JDlgCartao_ebg(null, true);
         jDlgCartao_ebg.setVisible(true);
     }//GEN-LAST:event_jBtnToolCartao_ebgActionPerformed
 
     private void jBtnToolVendedor_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnToolVendedor_ebgActionPerformed
-        JDlgVendedorNovoIA jDlgVendedor_ebg = new JDlgVendedorNovoIA(null, true);
+        JDlgVendedor_ebg jDlgVendedor_ebg = new JDlgVendedor_ebg(null, true);
         jDlgVendedor_ebg.setVisible(true);
     }//GEN-LAST:event_jBtnToolVendedor_ebgActionPerformed
 
     private void jBtnToolProduto_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnToolProduto_ebgActionPerformed
-        JDlgProdutoNovoIA jDlgProduto_ebg = new JDlgProdutoNovoIA(null, true);
+        JDlgProduto_ebg jDlgProduto_ebg = new JDlgProduto_ebg(null, true);
         jDlgProduto_ebg.setVisible(true);
     }//GEN-LAST:event_jBtnToolProduto_ebgActionPerformed
 

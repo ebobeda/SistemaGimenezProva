@@ -58,14 +58,14 @@ public class JDlgVendaproduto_ebg extends javax.swing.JDialog {
 
         jBtnCancelar_ebg = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jCboProduto_ebg = new javax.swing.JComboBox<Produto>();
+        jCboProduto_ebg = new javax.swing.JComboBox<ProdutoEbg>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTxtQuantidade_ebg = new javax.swing.JTextField();
         jTxtValorunit_ebg = new javax.swing.JTextField();
         jTxtTotal_ebg = new javax.swing.JTextField();
-        jBtnConfirmar_ebg = new javax.swing.JButton();
+        jBtnOk_ebg = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,6 +78,12 @@ public class JDlgVendaproduto_ebg extends javax.swing.JDialog {
         });
 
         jLabel1.setText("Produto");
+
+        jCboProduto_ebg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCboProduto_ebgActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Quantidade");
 
@@ -97,11 +103,11 @@ public class JDlgVendaproduto_ebg extends javax.swing.JDialog {
             }
         });
 
-        jBtnConfirmar_ebg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/05 - ok.png"))); // NOI18N
-        jBtnConfirmar_ebg.setText("Confirmar");
-        jBtnConfirmar_ebg.addActionListener(new java.awt.event.ActionListener() {
+        jBtnOk_ebg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/05 - ok.png"))); // NOI18N
+        jBtnOk_ebg.setText("Confirmar");
+        jBtnOk_ebg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnConfirmar_ebgActionPerformed(evt);
+                jBtnOk_ebgActionPerformed(evt);
             }
         });
 
@@ -132,7 +138,7 @@ public class JDlgVendaproduto_ebg extends javax.swing.JDialog {
                                 .addComponent(jCboProduto_ebg, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jBtnConfirmar_ebg)
+                        .addComponent(jBtnOk_ebg)
                         .addGap(18, 18, 18)
                         .addComponent(jBtnCancelar_ebg)))
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -157,7 +163,7 @@ public class JDlgVendaproduto_ebg extends javax.swing.JDialog {
                     .addComponent(jTxtTotal_ebg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnConfirmar_ebg)
+                    .addComponent(jBtnOk_ebg)
                     .addComponent(jBtnCancelar_ebg))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
@@ -167,9 +173,8 @@ public class JDlgVendaproduto_ebg extends javax.swing.JDialog {
 
     private void jBtnCancelar_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar_ebgActionPerformed
         // TODO add your handling code here:
-
-        desabilitar();
         setVisible(false);
+        Util_ebg.limparCampos(jCboProduto_ebg,jTxtQuantidade_ebg, jTxtValorunit_ebg, jTxtTotal_ebg);
     }//GEN-LAST:event_jBtnCancelar_ebgActionPerformed
 
     private void jTxtQuantidade_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtQuantidade_ebgActionPerformed
@@ -180,7 +185,7 @@ public class JDlgVendaproduto_ebg extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtValorunit_ebgActionPerformed
 
-    private void jBtnConfirmar_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmar_ebgActionPerformed
+    private void jBtnOk_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk_ebgActionPerformed
         // TODO add your handling code here:
         VendaprodutoEbg vendaprodutoEbg = new VendaprodutoEbg();
         vendaprodutoEbg.setProdutoEbg ((ProdutoEbg) jCboProduto_ebg.getSelectedItem() );
@@ -193,7 +198,11 @@ public class JDlgVendaproduto_ebg extends javax.swing.JDialog {
         jDlgVenda_ebg.vendaprodutoController_ebg.updateBean(jDlgVenda_ebg.getSelectedRowProd(), vendaprodutoEbg);
         }
         setVisible(false);
-    }//GEN-LAST:event_jBtnConfirmar_ebgActionPerformed
+    }//GEN-LAST:event_jBtnOk_ebgActionPerformed
+
+    private void jCboProduto_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboProduto_ebgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCboProduto_ebgActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,7 +248,7 @@ public class JDlgVendaproduto_ebg extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCancelar_ebg;
-    private javax.swing.JButton jBtnConfirmar_ebg;
+    private javax.swing.JButton jBtnOk_ebg;
     private javax.swing.JComboBox<ProdutoEbg> jCboProduto_ebg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -99,7 +99,7 @@ public class JDlgVendaPesquisar_ebg extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtn1)
                     .addComponent(jBtn2))
-                .addGap(0, 143, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         pack();
@@ -169,4 +169,7 @@ public class JDlgVendaPesquisar_ebg extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+public void setTelaAnterior(JDlgVenda_ebg jDlgVenda_ebg) {
+        this.jDlgVenda_ebg = jDlgVenda_ebg;
+    }
 }

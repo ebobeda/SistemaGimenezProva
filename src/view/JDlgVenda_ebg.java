@@ -48,7 +48,9 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
         initComponents();
         setTitle("Vendas");
         setLocationRelativeTo(null);
-        Util_ebg.habilitar(false, jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg, jBtnIncluirProd_ebg, jBtnAlterarProd_ebg, jBtnIncluirProd_ebg, jBtnCancelar_ebg, jBtnConfirmar_ebg);
+        Util_ebg.habilitar(true, jBtnIncluir_ebg, jBtnPesquisar_ebg);
+        Util_ebg.habilitar(false, jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg, jBtnIncluirProd_ebg, jBtnAlterarProd_ebg, jBtnExcluirProd_ebg, jBtnAlterar_ebg, jBtnCancelar_ebg, jBtnExcluir_ebg, jBtnConfirmar_ebg);
+        Util_ebg.limparCampos(jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg);
         venda_DAO = new Venda_DAO();
         
         Cliente_DAO cliente_DAO = new Cliente_DAO();
@@ -116,7 +118,7 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
         jBtnAlterarProd_ebg = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTxtTotal_ebg = new javax.swing.JTextField();
-        jCboVendedor_ebg = new javax.swing.JComboBox<Caixa>();
+        jCboVendedor_ebg = new javax.swing.JComboBox<VendedorEbg>();
         jBtnExcluirProd_ebg = new javax.swing.JButton();
         jBtnAlterar_ebg = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -128,7 +130,7 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
         jTxtVenda_ebg = new javax.swing.JTextField();
         jBtnCancelar_ebg = new javax.swing.JButton();
         jBtnPesquisar_ebg = new javax.swing.JButton();
-        jCboCliente_ebg = new javax.swing.JComboBox<Cliente>();
+        jCboCliente_ebg = new javax.swing.JComboBox<ClienteEbg>();
         jLabel2 = new javax.swing.JLabel();
         jBtnIncluirProd_ebg = new javax.swing.JButton();
         jBtnIncluir_ebg = new javax.swing.JButton();
@@ -204,6 +206,12 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
         });
 
         jLabel4.setText("Cliente");
+
+        jTxtVenda_ebg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtVenda_ebgActionPerformed(evt);
+            }
+        });
 
         jBtnCancelar_ebg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/03 - exit.png"))); // NOI18N
         jBtnCancelar_ebg.setText("Cancelar");
@@ -374,78 +382,105 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnExcluirProd_ebgActionPerformed
 
     private void jBtnAlterar_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterar_ebgActionPerformed
-        // TODO add your handling code here:
-        habilitar();
-        incluindo = false;
+        Util_ebg.habilitar(true, jBtnConfirmar_ebg, jBtnCancelar_ebg, jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg);
+        if (vendaEbg != null) {
+            incluindo = false;
+        } else {
+            Util_ebg.mensagem("Deve ser realizada uma pesquisa antes");
+        }
     }//GEN-LAST:event_jBtnAlterar_ebgActionPerformed
 
     private void jBtnExcluir_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_ebgActionPerformed
-        // TODO add your handling code here:
-        int resp = JOptionPane.showConfirmDialog(null, "Confirmar excluir?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (resp == JOptionPane.YES_OPTION) {
-            Venda venda = viewBean();
-            Venda_DAO venda_DAO = new Venda_DAO();
-            venda_DAO.delete(venda);
+        if (vendaEbg != null) {
+            if (Util_ebg.perguntar("Deseja excluir o pedido ?") == true) {
+                Vendaproduto_DAO vendaproduto_DAO = new Vendaproduto_DAO();
+                VendaprodutoEbg vendaprodutoEbg;
+                for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
+                    vendaprodutoEbg = vendaprodutoController_ebg.getBean(linha);
+                    vendaproduto_DAO.delete(vendaprodutoEbg);
+                }
+                venda_DAO.delete(vendaEbg);
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Exclusão cancelada!", "ALERTA", 2);
+            Util_ebg.mensagem("Deve ser realizada uma pesquisa antes");
         }
+        Util_ebg.limparCampos(jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg);
+        vendaEbg = null;
     }//GEN-LAST:event_jBtnExcluir_ebgActionPerformed
 
     private void jBtnConfirmar_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmar_ebgActionPerformed
         // TODO add your handling code here:
-        Venda venda = viewBean();
-
-        Venda_DAO venda_DAO = new Venda_DAO();
-        venda_DAO.insert(venda);
+        vendaEbg = viewBean();
 
         if (incluindo == true) {
-            venda_DAO.insert(venda);
+            venda_DAO.insert(vendaEbg);
+            for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
+                vendaprodutoEbg = vendaprodutoController_ebg.getBean(linha);
+                vendaprodutoEbg.setVendaEbg(vendaEbg);
+                vendaproduto_DAO.insert(vendaprodutoEbg);
+            }
         } else {
-            venda_DAO.update(venda);
+            venda_DAO.update(vendaEbg);
+            for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
+                vendaprodutoEbg = vendaprodutoController_ebg.getBean(linha);
+                vendaprodutoEbg.setVendaEbg(vendaEbg);
+                this.vendaproduto_DAO.update(vendaprodutoEbg);
+            }
         }
-
-        desabilitar();
+        vendaprodutoController_ebg.setList(new ArrayList());
+        vendaEbg = null;
+        Util_ebg.habilitar(true, jBtnIncluirProd_ebg, jBtnAlterarProd_ebg, jBtnExcluirProd_ebg, jBtnConfirmar_ebg, jBtnAlterar_ebg, jBtnExcluir_ebg, jBtnCancelar_ebg, jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg);
+        Util_ebg.habilitar(false, jBtnIncluir_ebg, jBtnPesquisar_ebg);
+        Util_ebg.limparCampos(jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg);
+        
     }//GEN-LAST:event_jBtnConfirmar_ebgActionPerformed
 
     private void jBtnCancelar_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar_ebgActionPerformed
-        // TODO add your handling code here:
-        limparCampos();
-        desabilitar();
+        Util_ebg.limparCampos(jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg);
+        vendaprodutoController_ebg.setList(new ArrayList());
+        vendaEbg = null;
+        Util_ebg.habilitar(true, jBtnIncluir_ebg, jBtnPesquisar_ebg);
+        Util_ebg.habilitar(false, jBtnIncluirProd_ebg, jBtnAlterarProd_ebg, jBtnExcluirProd_ebg, jBtnConfirmar_ebg, jBtnAlterar_ebg, jBtnExcluir_ebg, jBtnCancelar_ebg, jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg);
     }//GEN-LAST:event_jBtnCancelar_ebgActionPerformed
 
     private void jBtnPesquisar_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisar_ebgActionPerformed
-        // TODO add your handling code here:
-        //        String resp = JOptionPane.showInputDialog(null, "Entre com o código");
-        //        Venda_DAO venda_DAO = new Venda_DAO();
-        //        int id = Integer.valueOf(resp);
-        //        Venda venda = (Venda) venda_DAO.list( id );
-        //        beanView(venda);
-        JDlgVendaPesquisar jDlgVendaPesquisar = new JDlgVendaPesquisar(null, true);
-        jDlgVendaPesquisar.setTelaAnterior(this);
-        jDlgVendaPesquisar.setVisible(true);
+        JDlgVendaPesquisar_ebg jDlgVendaPesquisar_ebg = new JDlgVendaPesquisar_ebg(null, true);
+        jDlgVendaPesquisar_ebg.setTelaAnterior(this);
+        jDlgVendaPesquisar_ebg.setVisible(true);
+        
+        Util_ebg.habilitar(true, jBtnAlterar_ebg, jBtnExcluir_ebg, jBtnCancelar_ebg, jBtnPesquisar_ebg);
+        Util_ebg.habilitar(false, jBtnIncluir_ebg, jBtnConfirmar_ebg);
     }//GEN-LAST:event_jBtnPesquisar_ebgActionPerformed
 
     private void jCboCliente_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboCliente_ebgActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jCboCliente_ebgActionPerformed
 
     private void jBtnIncluirProd_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProd_ebgActionPerformed
         // TODO add your handling code here:
         JDlgVendaproduto_ebg jDlgVendaproduto_ebg = new JDlgVendaproduto_ebg(null, true);
-        jDlgVendaproduto_ebg.setTitle("Incluisão de Produtos");
+        jDlgVendaproduto_ebg.setTitle("Inclusão de Produtos");
         jDlgVendaproduto_ebg.setTelaAnterior(this);
         jDlgVendaproduto_ebg.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirProd_ebgActionPerformed
 
     private void jBtnIncluir_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluir_ebgActionPerformed
-        // TODO add your handling code here:
-        habilitar();
-        limparCampos();
+        Util_ebg.habilitar(true, jBtnIncluirProd_ebg, jBtnAlterarProd_ebg, jBtnExcluirProd_ebg, jBtnConfirmar_ebg, jBtnCancelar_ebg, jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg);
+        Util_ebg.habilitar(false, jBtnIncluir_ebg, jBtnAlterar_ebg, jBtnExcluir_ebg, jBtnPesquisar_ebg);
+        vendaprodutoController_ebg.setList(new ArrayList());
+        jTxtVenda_ebg.grabFocus();
+        incluindo = true;
+        vendaEbg = new VendaEbg();
+        Util_ebg.limparCampos(jTxtVenda_ebg, jFmtData_ebg, jCboVendedor_ebg, jCboCliente_ebg, jTxtTotal_ebg);
     }//GEN-LAST:event_jBtnIncluir_ebgActionPerformed
 
     private void jFmtData_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtData_ebgActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFmtData_ebgActionPerformed
+
+    private void jTxtVenda_ebgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtVenda_ebgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtVenda_ebgActionPerformed
 
     /**
      * @param args the command line arguments
@@ -503,7 +538,7 @@ public class JDlgVenda_ebg extends javax.swing.JDialog {
     private javax.swing.JButton jBtnIncluir_ebg;
     private javax.swing.JButton jBtnPesquisar_ebg;
     private javax.swing.JComboBox<ClienteEbg> jCboCliente_ebg;
-    private javax.swing.JComboBox<VendaEbg> jCboVendedor_ebg;
+    private javax.swing.JComboBox<VendedorEbg> jCboVendedor_ebg;
     private javax.swing.JFormattedTextField jFmtData_ebg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

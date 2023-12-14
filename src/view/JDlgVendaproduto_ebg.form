@@ -53,7 +53,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="jBtnConfirmar_ebg" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBtnOk_ebg" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jBtnCancelar_ebg" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -85,7 +85,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jBtnConfirmar_ebg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBtnOk_ebg" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnCancelar_ebg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
@@ -116,8 +116,11 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCboProduto_ebgActionPerformed"/>
+      </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;Produto&gt;()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;ProdutoEbg&gt;()"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ProdutoEbg&gt;"/>
       </AuxValues>
     </Component>
@@ -148,7 +151,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtTotal_ebg">
     </Component>
-    <Component class="javax.swing.JButton" name="jBtnConfirmar_ebg">
+    <Component class="javax.swing.JButton" name="jBtnOk_ebg">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagens/05 - ok.png"/>
@@ -156,7 +159,7 @@
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnConfirmar_ebgActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnOk_ebgActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
